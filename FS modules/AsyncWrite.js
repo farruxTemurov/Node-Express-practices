@@ -14,5 +14,7 @@ fs.appendFile('demo1.txt', data, (err) => { // fs.writeFile will override previo
         console.log("Data stored in a file");
     }
 });
+
+fs.writeFileSync('demo1.txt', data);
 console.log("1st message");
 console.log("2nd message");

@@ -11,3 +11,12 @@ fs.readFile("demo1.txt", (err, data) => {
         console.log(data.toString());
     }
 });
+
+console.log("Dummy message 1");
+console.log("Dummy message 2");
+
+let msg = fs.readFileSync('demo1.txt');
+console.log(msg.toString());
+
+console.log("Dummy message 1");
+console.log("Dummy message 2");
