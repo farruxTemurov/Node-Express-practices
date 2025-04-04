@@ -47,6 +47,17 @@ app.post("/storeProducts", (req, res) => {
     }
 });
 
+// http://localhost:3000/deleteProducts/1
+app.delete("/deleteProducts/:pid", (req, res) => {
+    let pid = req.params.pid; //receiving query param value from the url 
+    let index = products.findIndex((p) => p.pid == pid);
+    if (index == -1) {
+        res.json({ "msg": "Product Not Found with id " + pid });
+    } else {
+        products.splice(index, 1);
+        res.json({ "msg": "Prodcut deleted successfully!" });
+    }
+});
 
 app.listen(3000, () => {
     console.log('Project is running on port number 3000');
