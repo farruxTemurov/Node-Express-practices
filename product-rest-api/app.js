@@ -1,6 +1,8 @@
 let express = require("express");
 let app = express();
 
+app.use(express.json()); //middleware to get info from post methods in json format
+
 let products = [
     { pid: 1, name: "Laptop", price: 1000 },
     { pid: 2, name: "Mobile", price: 500 },
@@ -23,13 +25,25 @@ app.get("/findProductsByIdUsingQueryParam", (req, res) => {
 });
 
 // http://localhost:3000/findProductsByIdUsingPathParam/1
-app.get("/findProductsByIdUsingPathParam/:pid", (req, res) => { 
+app.get("/findProductsByIdUsingPathParam/:pid", (req, res) => {
     let pid = req.params.pid; //receiving query param value from the url 
     let result = products.find((p) => p.pid == pid);
     if (!result) {
         res.json({ "msg": "Product Not Found!" });
     } else {
         res.json(result);
+    }
+});
+
+// http://localhost:3000/storeProducts
+app.post("/storeProducts", (req, res) => {
+    let product = req.body;
+    let result = products.find((p) => p.pid == product.pid);
+    if (result == undefined) {
+        products.push(product);
+        res.json({ "msg": "Product Stored Successfully!" });
+    } else {
+        res.json({ "msg": "Product ID must be unique!" });
     }
 });
 
