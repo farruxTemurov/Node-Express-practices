@@ -22,6 +22,17 @@ app.get("/findProductsByIdUsingQueryParam", (req, res) => {
     }
 });
 
+// http://localhost:3000/findProductsByIdUsingPathParam/1
+app.get("/findProductsByIdUsingPathParam/:pid", (req, res) => { 
+    let pid = req.params.pid; //receiving query param value from the url 
+    let result = products.find((p) => p.pid == pid);
+    if (!result) {
+        res.json({ "msg": "Product Not Found!" });
+    } else {
+        res.json(result);
+    }
+});
+
 
 app.listen(3000, () => {
     console.log('Project is running on port number 3000');
