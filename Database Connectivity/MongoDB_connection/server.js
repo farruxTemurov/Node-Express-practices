@@ -42,6 +42,20 @@ app.get("/findProducts", async (req, res) => {
     }
 });
 
+app.get("/findProductById/:id", async (req, res) => {
+    try {
+        let pid = req.params.id;
+        let result = await db.collection("product").findOne({ _id: Number(pid) });
+        if (result == null) {
+            res.json({ "msg": "Nothing was Found with this ID" });
+        } else {
+            res.json(result);
+        }
+    } catch (error) {
+        res.json({ "msg": error });
+    }
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
