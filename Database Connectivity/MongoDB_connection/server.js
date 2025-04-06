@@ -25,9 +25,18 @@ mongoClient.connect(url).
 app.post("/storeProduct", async (req, res) => {
     try {
         let newProduct = req.body; // get the product information from the request body
-        console.log(newProduct); 
-        let result = await db.collection("product").insertOne(newProduct);  
+        console.log(newProduct);
+        let result = await db.collection("product").insertOne(newProduct);
         res.json({ "msg": result });
+    } catch (error) {
+        res.json({ "msg": error });
+    }
+});
+
+app.get("/findProducts", async (req, res) => {
+    try {
+        let result = await db.collection("product").find().toArray(); // gets all the products in product collection and converts them into array
+        res.json(result);
     } catch (error) {
         res.json({ "msg": error });
     }
