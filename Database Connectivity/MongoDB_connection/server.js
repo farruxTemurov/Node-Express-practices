@@ -56,6 +56,20 @@ app.get("/findProductById/:id", async (req, res) => {
     }
 });
 
+app.delete("/deleteProductById/:id", async (req, res) => {
+    try {
+        let pid = req.params.id;
+        let result = await db.collection("product").deleteOne({ _id: Number(pid) });
+        if (result.deletedCount == 1) {
+            res.json({ "msg": "Product deleted successfully!" });
+        } else {
+            res.json({ "msg": "Product Not Found!" });
+        }
+    } catch (error) {
+        res.json({ "msg": error });
+    }
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
