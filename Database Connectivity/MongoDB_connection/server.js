@@ -22,6 +22,17 @@ mongoClient.connect(url).
         console.log(error);
     });
 
+app.post("/storeProduct", async (req, res) => {
+    try {
+        let newProduct = req.body; // get the product information from the request body
+        console.log(newProduct); 
+        let result = await db.collection("product").insertOne(newProduct);  
+        res.json({ "msg": result });
+    } catch (error) {
+        res.json({ "msg": error });
+    }
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
