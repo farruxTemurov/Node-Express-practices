@@ -70,6 +70,23 @@ app.delete("/deleteProductById/:id", async (req, res) => {
     }
 });
 
+app.put("/updateProductById/:id", async (req, res) => {
+    try {
+        let pid = req.params.id;
+        let productToUpdate = req.body;
+        let result = await db.collection("product").updateOne({ _id: Number(pid) }, { $set: productToUpdate });
+        if (result.modifiedCount == 1) {
+            res.json({ "msg": "Product updated successfully!" });
+        } else if (result.matchedCount == 1) {
+            res.json({ "msg": "Product was found but not updated as the new value is the same as the old one" });
+        } else {
+            res.json({ "msg": "Product Not Found!" });
+        }
+    } catch (error) {
+        res.json({ "msg": error });
+    }
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
