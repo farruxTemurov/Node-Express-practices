@@ -1,8 +1,8 @@
-let mongose = require("mongose");
+let mongoose = require("mongoose");
 
 let MongoDbConnect = async () => {
     try {
-        await mongose.connect("mongodb://localhost:21017/products_db");
+        await mongo0se.connect("mongodb://localhost:21017/products_db");
     } catch (err) {
         console.log(err);
     }
