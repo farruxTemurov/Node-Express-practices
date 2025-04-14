@@ -1,4 +1,4 @@
-let productModel = require('../models/products.models');        // ES5 style import of productModel
+let productModel = require('../models/products.model');        // ES5 style import of productModel
 let mongoose = require('mongoose');
 // this file contains more than one function with pure database logic. 
 let storeProduct = async (product) => {
