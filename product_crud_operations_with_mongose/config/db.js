@@ -1,14 +1,14 @@
-let mongoose = require("mongoose");
+let mongoose = require('mongoose');
 
 let MongoDbConnect = async () => {
     try {
-        await mongo0se.connect("mongodb://localhost:21017/products_db");
+        await mongoose.connect('mongodb://localhost:27017/product_db');
+        console.log("MongoDB connected successfully");
     } catch (err) {
         console.log(err);
     }
 }
 
 module.exports = {
-    MongoDbConnect: MongoDbConnect,
-
+    MongoDbConnect
 }
