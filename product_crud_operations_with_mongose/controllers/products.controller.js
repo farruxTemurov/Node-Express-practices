@@ -24,7 +24,7 @@ let findAllProducts = async (req, res) => {
 let searchProductById = async (req, res) => {
     try {
         let pid = req.params.pid;
-        console.log("Product id is in controller ", pid);
+        console.log("Product id in controller is ", pid);
         let product = await productService.findProductById(pid);
         if (product) {
             res.json(product);
