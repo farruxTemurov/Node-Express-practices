@@ -3,15 +3,13 @@ let express = require("express");
 
 let app = express();
 
+let products;
+
 app.get("/products", async (req, res) => {
-    let response = await axios.get("https://fakestoreapi.com/products");
-    let products = await response.data;
     res.json(products);
 });
 
 app.get("/findProduct/:pid", async (req, res) => {
-    let response = await axios.get("https://fakestoreapi.com/products");
-    let products = await response.data;
     let pid = req.params.pid;
 
     let product = products.find(p => p.id == pid);
@@ -31,6 +29,9 @@ app.get("/findProduct/:pid", async (req, res) => {
 
 // loadFakeData();
 
-app.listen("3000", () => {
+app.listen("3000", async () => {
     console.log("App is running on port 3000");
+    let response = await axios.get("https://fakestoreapi.com/products");
+    products = response.data;
+    console.log("products fetched from api " + products.length);
 });
