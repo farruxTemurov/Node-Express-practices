@@ -32,6 +32,6 @@ app.get("/findProduct/:pid", async (req, res) => {
 app.listen("3000", async () => {
     console.log("App is running on port 3000");
     let response = await axios.get("https://fakestoreapi.com/products");
-    products = response.data;
+    products = response.data; //passing the loaded data from the resp into this variable
     console.log("products fetched from api " + products.length);
 });
