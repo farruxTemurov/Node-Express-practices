@@ -11,7 +11,7 @@ let signIn = async (user) => {
         let isPasswordMatched = await bycrypt.compare(user.password, existingUser.password);
         if (isPasswordMatched) {
             let payload = { email: existingUser.email, role: existingUser.role };
-            let token = jwttoken.sign(payload, process.env.MY_TOKEN, { expiresIn: "1m" });
+            let token = jwttoken.sign(payload, process.env.MY_TOKEN, { expiresIn: "1h" });
             return token;
         } else {
             throw new Error("Password is incorrect");
@@ -20,6 +20,7 @@ let signIn = async (user) => {
         throw new Error("Email does not exist");
     }
 }
+
 let signUp = async (user) => {
     let salt = await bycrypt.genSalt(10); // 10 rounds of salting
     user.password = await bycrypt.hash(user.password, salt); // hashing password with 10 rounds of salting
