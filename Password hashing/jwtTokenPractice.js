@@ -1,7 +1,7 @@
 let jwttoken = require("jsonwebtoken");
 let myKey = "myKey";
 
-let payloadData = {
+let payloadData = { // payload is information about the user (email, role)
     "emailid": "user@gmail.com",   // value can be dynamic 
     "role": "user",
 }
